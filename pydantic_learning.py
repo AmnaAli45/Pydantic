@@ -1,16 +1,16 @@
 from pydantic import BaseModel
-from typing import List,Dict
+from typing import List,Dict,Optional
 
 class Patient(BaseModel):
     name:str
     age: int
     weight: float
     married: bool
-    allergies : List[str]
+    allergies : Optional[List[str]] = None
     contact_info :Dict[str,str]
-    
-    
-patient_info ={"name":"Amna","age":20, "weight": 55.5, "married": False, "allergies":["pollen","dust"], "contact_info":{"email":"amna@example.com"}}
+
+
+patient_info ={"name":"Amna","age":20, "weight": 55.5, "married": False, "allergies":None, "contact_info":{"email":"amna@example.com"}}
 
 patient = Patient(**patient_info)
 
