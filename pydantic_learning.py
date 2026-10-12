@@ -3,6 +3,7 @@ from typing import List,Dict,Optional
 
 class Patient(BaseModel):
     name:str
+    email: str
     age: int
     weight: float
     married: bool
@@ -13,6 +14,13 @@ class Patient(BaseModel):
     @classmethod
     def name_transformation(cls, value):
         return value.upper()
+    
+    @field_validator('email')
+    @classmethod
+    def email_validation(cls, value):
+        if "@" not in value:
+            raise ValueError("Invalid email address")
+        return value
 
 
 patient_info ={"name":"Amna","age":20, "weight": 55.5, "married": False, "allergies":None, "contact_info":{"email":"amna@example.com"}}
