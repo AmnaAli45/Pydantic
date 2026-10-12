@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel,field_validator
 from typing import List,Dict,Optional
 
 class Patient(BaseModel):
@@ -8,6 +8,11 @@ class Patient(BaseModel):
     married: bool
     allergies : Optional[List[str]] = None
     contact_info :Dict[str,str]
+    
+    @field_validator('name')
+    @classmethod
+    def name_transformation(cls, value):
+        return value.upper()
 
 
 patient_info ={"name":"Amna","age":20, "weight": 55.5, "married": False, "allergies":None, "contact_info":{"email":"amna@example.com"}}
